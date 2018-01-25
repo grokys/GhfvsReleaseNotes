@@ -1,0 +1,3 @@
+[submodule "Octokit.GraphQL"]
+	path = Octokit.GraphQL
+	url = https://github.com/grokys/Octokit.GraphQL
