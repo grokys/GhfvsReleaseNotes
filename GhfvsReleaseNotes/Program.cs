@@ -10,7 +10,7 @@ namespace GhfvsReleaseNotes
 {
     class Program
     {
-        static readonly IList<string> Labels = IssueModel.InterestingLabels;
+        static readonly string[] Labels = IssueModel.InterestingLabels;
 
         public static async Task Main(string[] args)
         {
@@ -66,7 +66,7 @@ namespace GhfvsReleaseNotes
         static async Task<DateTimeOffset> GetLastReleaseDate(Connection connection)
         {
             var query = new Query()
-                .Repository("github", "VisualStudio")
+                .Repository(owner: "github", name: "VisualStudio")
                 .Releases(last: 1).Nodes
                 .Select(x => x.PublishedAt);
             var result = await connection.Run(query);
@@ -87,7 +87,7 @@ namespace GhfvsReleaseNotes
             do
             {
                 var query = new Query()
-                    .Repository("github", "VisualStudio")
+                    .Repository(owner: "github", name: "VisualStudio")
                     .Issues(first: 30, after: cursor, labels: Labels, states: new[] { IssueState.Closed })
                     .Select(x => new
                     {
@@ -131,7 +131,7 @@ namespace GhfvsReleaseNotes
             do
             {
                 var query = new Query()
-                    .Repository("github", "VisualStudio")
+                    .Repository(owner: "github", name: "VisualStudio")
                     .PullRequests(first: 30, after: cursor, labels: Labels, states: new[] { PullRequestState.Merged })
                     .Select(x => new
                     {

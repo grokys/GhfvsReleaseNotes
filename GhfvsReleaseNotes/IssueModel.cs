@@ -6,7 +6,7 @@ namespace GhfvsReleaseNotes
 {
     internal class IssueModel
     {
-        public static readonly IList<string> InterestingLabels = new[] { "feature", "enhancement", "bug" };
+        public static readonly string[] InterestingLabels = new[] { "feature", "enhancement", "bug" };
         public static readonly IList<string> Sections = new[] { "Feature", "Enhancement", "Fixes" };
         static readonly IList<string> Badges = new[] { "Added", "Improved", "Fixed" };
 
@@ -17,6 +17,6 @@ namespace GhfvsReleaseNotes
         public string Badge => Badges[LabelIndex];
         public string Section => Sections[LabelIndex];
         public int SortOrder => LabelIndex;
-        int LabelIndex => Labels.Select(x => InterestingLabels.IndexOf(x)).FirstOrDefault(x => x != -1);
+        int LabelIndex => Labels.Select(x => InterestingLabels.ToList().IndexOf(x)).FirstOrDefault(x => x != -1);
     }
 }
